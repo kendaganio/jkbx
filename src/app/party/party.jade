@@ -1,0 +1,23 @@
+.container
+  .party-page
+    br
+    br
+    br
+    form(name="form", ng-submit="addTrack()")
+      .row
+        input.six.columns(type="text" ng-model="newTrack.name" placeholder="Try searching for a song..")
+      .row
+        .three.columns
+          a(ui-sref="player({name: party})" class="u-full-width button") Open Player
+        .three.columns
+          button.button-primary.u-full-width(type="submit") Add track to queue
+
+    div(ng-if="tracks.length < 1")
+      h1 Nothing to see here.
+      h4 Try adding a track!
+    div(ng-if="tracks.length >= 1")
+      ul
+        li(ng-repeat="track in tracks track by $index")
+          {{ track.title }}
+          &nbsp;
+          a(href="" ng-click="removeTrack(track, $index)") (delete)
