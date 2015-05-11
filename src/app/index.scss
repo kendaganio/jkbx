@@ -17,3 +17,17 @@ h1, h2, h3, .button {
 .join-page {
   margin-top: 30%;
 }
+
+.player-page {
+  position: relative;
+
+  #web-player {
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
+  &::-webkit-scrollbar {
+    display: none; 
+  }
+
+}

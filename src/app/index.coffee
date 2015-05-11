@@ -1,4 +1,4 @@
-angular.module 'jkbx', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ui.router', 'firebase']
+angular.module 'jkbx', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ui.router', 'firebase', 'youtube-embed']
   .config ($stateProvider, $urlRouterProvider) ->
     $stateProvider
       .state "home",
