@@ -6,6 +6,12 @@ angular.module "jkbx"
     $scope.newTrack = {}
     $scope.tracks = $firebaseArray(ref)
 
+    $scope.loadingTracks = true
+
+    $scope.tracks.$loaded().then ->
+      $scope.loadingTracks = false
+
+
     $scope.addTrack = (form) ->
       $scope.tracks.$add
         title: $scope.newTrack.name

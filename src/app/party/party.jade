@@ -12,10 +12,12 @@
         .three.columns
           button.button-primary.u-full-width(type="submit") Add track to queue
 
-    div(ng-if="tracks.length < 1")
+    div(ng-if="loadingTracks")
+      h1 Gimme a sec to get the tracks...
+    div(ng-if="tracks.length < 1 && !loadingTracks")
       h1 Nothing to see here.
       h4 Try adding a track!
-    div(ng-if="tracks.length >= 1")
+    div(ng-if="tracks.length >= 1 && !loadingTracks")
       ul
         li(ng-repeat="track in tracks track by $index")
           {{ track.title }}
