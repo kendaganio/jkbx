@@ -2,10 +2,17 @@
   .party-page
     br
     br
-    br
-    form(name="form", ng-submit="addTrack()")
+    form(name="form")
       .row
-        input.six.columns(type="text" ng-model="newTrack.name" placeholder="Try searching for a song..")
+        .six.columns.search
+          input.search-bar.u-full-width(type="text" ng-model="newTrack.name" ng-model-options="{debounce: 800}" placeholder="Try searching for a song..")
+          ul.search-results(ng-if="results.length > 1")
+            li(ng-repeat="result in results" ng-click="addTrack(result)")
+              .image-holder
+                img(src="{{result.snippet.thumbnails.default.url}}")
+              p.metadata
+                strong {{result.snippet.title}}
+                ' ({{result.snippet.channelTitle}})
       .row
         .three.columns
           a(ui-sref="player({name: party})" class="u-full-width button") Open Player
@@ -18,8 +25,15 @@
       h1 Nothing to see here.
       h4 Try adding a track!
     div(ng-if="tracks.length >= 1 && !loadingTracks")
-      ul
-        li(ng-repeat="track in tracks track by $index")
-          {{ track.title }}
-          &nbsp;
-          a(href="" ng-click="removeTrack(track, $index)") (delete)
+      .row
+        h6 Queued Tracks
+      .row
+        ul.queue-list.six.columns
+          li(ng-repeat="track in tracks track by $index" ng-class="{playing: track.playing}")
+            .image-holder
+              img(src="{{track.img}}")
+            p.metadata
+              strong {{ track.title }}
+              &nbsp;
+              a(href="" ng-click="tracks.$remove($index)") (delete)
+

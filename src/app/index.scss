@@ -1,21 +1,112 @@
 @import url(http://fonts.googleapis.com/css?family=Montserrat:700);
-@import url(http://fonts.googleapis.com/css?family=Raleway);
+@import url(http://fonts.googleapis.com/css?family=Raleway:300,700);
 
 body {
 }
 
-h1, h2, h3, .button {
+h1, h2, h3, h6 {
   font-family: 'Montserrat', sans-serif;
   font-weight: 700;
 }
 
+h6 {
+  display: inline-block;
+  height: 38px;
+  color: #555;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 38px;
+  letter-spacing: .1rem;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  box-sizing: border-box;
+  margin: 0;
+  padding-left: 5px;
+}
+
+form {
+  margin-bottom: 0;
+}
+
+@mixin list-styling {
+  list-style: none;
+  border: 1px solid #D1D1D1;
+
+  li {
+    display: table;
+    box-sizing: border-box;
+    width: 100%;
+    clear: both;
+    padding: 10px;
+    margin-bottom: 0;
+    border-bottom: 1px solid #d1d1d1;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    .image-holder {
+      display: table-cell;
+      width: 15%;
+
+      img { 
+        width: 100%;
+        vertical-align: middle;
+      }
+    }
+
+    p.metadata {
+      display: table-cell;
+      vertical-align: middle;
+      margin: 0px;
+      width: 85%;
+      box-sizing: border-box;
+      padding-left: 10px;
+
+      font-size: 90%;
+      text-overflow: ellipsis;
+    }
+  }
+}
 
 .landing-page {
   margin-top: 25%;
 }
 
-.join-page {
-  margin-top: 30%;
+.party-page {
+
+  .search {
+    position: relative;
+    margin-bottom: 10px;
+
+    .search-bar {
+      margin: 0;
+    }
+
+    ul.search-results {
+      @include list-styling;
+      background: white;
+      position: absolute;
+
+      li {
+        &:hover {
+          background: #BCEFFF;
+          cursor: pointer;
+        }
+      }
+    } //end-search-results
+
+  }
+
+  ul.queue-list {
+    @include list-styling;
+
+    .playing {
+      background: rgb(206, 252, 203);
+    }
+  }
 }
 
 .player-page {
