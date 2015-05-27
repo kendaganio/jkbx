@@ -2,9 +2,9 @@
   .party-page
     br
     br
-    form(name="form")
-      .row
-        .six.columns.search
+    .row
+      .six.columns
+        form.search(name="form")
           input.search-bar.u-full-width(type="text" ng-model="newTrack.name" ng-model-options="{debounce: 800}" placeholder="Try searching for a song..")
           ul.search-results(ng-if="results.length > 1")
             li(ng-repeat="result in results" ng-click="addTrack(result)")
@@ -13,27 +13,39 @@
               p.metadata
                 strong {{result.snippet.title}}
                 ' ({{result.snippet.channelTitle}})
-      .row
-        .three.columns
-          a(ui-sref="player({name: party})" class="u-full-width button") Open Player
-        .three.columns
-          button.button-primary.u-full-width(type="submit") Add track to queue
 
-    div(ng-if="loadingTracks")
-      h1 Gimme a sec to get the tracks...
-    div(ng-if="tracks.length < 1 && !loadingTracks")
-      h1 Nothing to see here.
-      h4 Try adding a track!
-    div(ng-if="tracks.length >= 1 && !loadingTracks")
-      .row
-        h6 Queued Tracks
-      .row
-        ul.queue-list.six.columns
-          li(ng-repeat="track in tracks track by $index" ng-class="{playing: track.playing}")
-            .image-holder
-              img(src="{{track.img}}")
-            p.metadata
-              strong {{ track.title }}
+        div(ng-if="loadingTracks")
+          h1 Gimme a sec to get the tracks...
+        div(ng-if="tracks.length < 1 && !loadingTracks")
+          h1 Nothing to see here.
+          h4 Try adding a track!
+        div(ng-if="tracks.length >= 1 && !loadingTracks")
+          .row
+            h6 Queued Tracks
+          .row
+            ul.queue-list
+              li(ng-repeat="track in tracks track by $index" ng-class="{playing: track.playing}")
+                .image-holder
+                  img(src="{{track.img}}")
+                p.metadata
+                  strong {{ track.title }}
+                p.controls
+                  a(href="" title="remove" ng-click="tracks.$remove($index)")
+                    i.ion-close
+
+      .six.columns
+        .row
+          .twelve.columns
+            a(ui-sref="player({name: party})" target="_blank" class="u-full-width button") 
+              | Open Standalone Player
               &nbsp;
-              a(href="" ng-click="tracks.$remove($index)") (delete)
-
+              i.ion-arrow-right-a
+        .row
+          .four.columns
+            button.button-primary.u-full-width(ng-click="trackAction('pause')") Pause
+          .four.columns
+            button.button-primary.u-full-width(ng-click="trackAction('play')") Play
+          .four.columns
+            button.button-primary.u-full-width(ng-click="trackAction('skip')") Skip
+        .row
+          h6 Played Tracks

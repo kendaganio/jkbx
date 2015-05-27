@@ -1,14 +1,22 @@
 angular.module "jkbx"
-  .controller "PartyCtrl", ($scope, $stateParams, $firebaseArray) ->
+  .controller "PartyCtrl", ($scope, $stateParams, $firebaseArray, $firebaseObject) ->
 
     ref = new Firebase("https://jkbx.firebaseio.com/party/#{$stateParams.name}/tracks")
-    $scope.party = $stateParams.name
+    controlsRef = new Firebase("https://jkbx.firebaseio.com/party/#{$stateParams.name}/controls")
+    controls = $firebaseObject(controlsRef)
+
     $scope.newTrack = {}
     $scope.tracks = $firebaseArray(ref)
     $scope.loadingTracks = true
 
     $scope.tracks.$loaded().then ->
       $scope.loadingTracks = false
+
+    $scope.trackAction = (action) ->
+      controls.action = action
+      controls.time = Date.now()
+      controls.$save().then ->
+        console.log 'pew pew -- ', controls
 
     $scope.addTrack = (track) ->
       $scope.tracks.$add
@@ -36,4 +44,3 @@ angular.module "jkbx"
         request.execute (res) ->
           $scope.$apply ->
             $scope.results = res.result.items
-            console.log $scope.results

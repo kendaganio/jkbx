@@ -68,6 +68,11 @@ form {
       font-size: 90%;
       text-overflow: ellipsis;
     }
+
+    p.controls {
+      display: table-cell;
+      vertical-align: middle;
+    }
   }
 }
 
@@ -110,6 +115,7 @@ form {
 }
 
 .player-page {
+  background-color: black;
   position: relative;
 
   #web-player {
