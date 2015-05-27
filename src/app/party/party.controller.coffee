@@ -8,6 +8,7 @@ angular.module "jkbx"
 
     controls = $firebaseObject(ref.controls)
 
+    $scope.party = $stateParams.name
     $scope.newTrack = {}
     $scope.tracks = $firebaseArray(ref.tracks)
     $scope.playedTracks = $firebaseArray(ref.playedTracks)
