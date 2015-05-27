@@ -1,3 +1,6 @@
 angular.module "jkbx"
-  .controller "MainCtrl", ($scope) ->
-    console.log 'luh'
+  .controller "MainCtrl", ($scope, $state) ->
+
+    $scope.findOrCreateRoom = ->
+      $state.go 'party', {name: $scope.roomName}
+
