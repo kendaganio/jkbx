@@ -35,12 +35,6 @@
 
       .six.columns
         .row
-          .twelve.columns
-            a(ui-sref="player({name: party})" target="_blank" class="u-full-width button") 
-              | Open Standalone Player
-              &nbsp;
-              i.ion-arrow-right-a
-        .row
           .four.columns
             button.button-primary.u-full-width(ng-click="trackAction('pause')") Pause
           .four.columns
@@ -48,4 +42,21 @@
           .four.columns
             button.button-primary.u-full-width(ng-click="trackAction('skip')") Skip
         .row
-          h6 Played Tracks
+          .twelve.columns
+            a(ui-sref="player({name: party})" target="_blank" class="u-full-width button") 
+              | Open Standalone Player
+              &nbsp;
+              i.ion-arrow-right-a
+        div(ng-if="!loadingTracks")
+          .row
+            h6 Played Tracks
+          .row
+            ul.queue-list
+              li(ng-repeat="track in playedTracks track by $index")
+                .image-holder
+                  img(src="{{track.img}}")
+                p.metadata
+                  strong {{ track.title }}
+                p.controls
+                  a(href="" title="remove" ng-click="playedTracks.$remove($index)")
+                    i.ion-close

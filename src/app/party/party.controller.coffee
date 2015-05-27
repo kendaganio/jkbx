@@ -1,12 +1,16 @@
 angular.module "jkbx"
   .controller "PartyCtrl", ($scope, $stateParams, $firebaseArray, $firebaseObject) ->
 
-    ref = new Firebase("https://jkbx.firebaseio.com/party/#{$stateParams.name}/tracks")
-    controlsRef = new Firebase("https://jkbx.firebaseio.com/party/#{$stateParams.name}/controls")
-    controls = $firebaseObject(controlsRef)
+    ref =
+      tracks: new Firebase("https://jkbx.firebaseio.com/party/#{$stateParams.name}/tracks")
+      controls: new Firebase("https://jkbx.firebaseio.com/party/#{$stateParams.name}/controls")
+      playedTracks: new Firebase("https://jkbx.firebaseio.com/party/#{$stateParams.name}/playedTracks")
+
+    controls = $firebaseObject(ref.controls)
 
     $scope.newTrack = {}
-    $scope.tracks = $firebaseArray(ref)
+    $scope.tracks = $firebaseArray(ref.tracks)
+    $scope.playedTracks = $firebaseArray(ref.playedTracks)
     $scope.loadingTracks = true
 
     $scope.tracks.$loaded().then ->

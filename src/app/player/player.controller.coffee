@@ -2,11 +2,14 @@ angular.module "jkbx"
   .controller "PlayerCtrl", ($scope, $stateParams, $firebaseArray, $firebaseObject) ->
 
     # Firebase stuff
-    tracksRef = new Firebase("https://jkbx.firebaseio.com/party/#{$stateParams.name}/tracks")
-    controlsRef = new Firebase("https://jkbx.firebaseio.com/party/#{$stateParams.name}/controls")
+    ref =
+      tracks: new Firebase("https://jkbx.firebaseio.com/party/#{$stateParams.name}/tracks")
+      controls: new Firebase("https://jkbx.firebaseio.com/party/#{$stateParams.name}/controls")
+      playedTracks: new Firebase("https://jkbx.firebaseio.com/party/#{$stateParams.name}/playedTracks")
 
-    $scope.tracks = $firebaseArray(tracksRef)
-    $scope.controls = $firebaseObject(controlsRef)
+    $scope.tracks = $firebaseArray(ref.tracks)
+    $scope.playedTracks = $firebaseArray(ref.playedTracks)
+    $scope.controls = $firebaseObject(ref.controls)
     $scope.playerHeight = window.innerHeight
     $scope.playerWidth = window.innerWidth
     $scope.index = 0
@@ -29,8 +32,7 @@ angular.module "jkbx"
       $scope.player.playVideo()
 
     $scope.$on 'youtube.player.ended', ($event, player) ->
-      $scope.playing.playing = false
-      $scope.tracks.$save($scope.playing)
-      $scope.index += 1
-      $scope.playing = $scope.tracks[$scope.index]
+      $scope.playedTracks.$add($scope.playing)
+      $scope.tracks.$remove(0).then ->
+        $scope.playing = $scope.tracks[0]
 
