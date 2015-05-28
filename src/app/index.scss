@@ -112,12 +112,12 @@ form {
 
   .now-playing {
     @include list-styling;
-    border-color: rgba(22, 160, 133, 0.7);
+    border-color: #1EAEDB;
     border-radius: 4px;
     margin-bottom: 10px;
 
     li {
-      border-color: rgba(22, 160, 133, 0.7);
+      border-color: #1EAEDB;
     }
 
     .track-actions {
