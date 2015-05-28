@@ -3,8 +3,9 @@
     h1 {{party}}'s playlist
     .row
       .six.columns
+        h6 Search for a track
         form.search(name="form")
-          input.search-bar.u-full-width(type="text" ng-model="newTrack.name" ng-model-options="{debounce: 800}" placeholder="Try searching for a song..")
+          input.search-bar.u-full-width(type="text" ng-model="newTrack.name" ng-model-options="{debounce: 800}" placeholder="Find your favorite artist or song..")
           ul.search-results(ng-if="results.length > 1")
             li(ng-repeat="result in results" ng-click="addTrack(result)")
               .image-holder
@@ -33,21 +34,31 @@
                   a(href="" title="remove" ng-click="tracks.$remove($index)")
                     i.ion-close
 
-      .six.columns
-        .row
-          .four.columns
-            button.button-primary.u-full-width(ng-click="trackAction('pause')") 
-              i.ion-ios-pause
-          .four.columns
-            button.button-primary.u-full-width(ng-click="trackAction('play')")
-              i.ion-ios-play
-          .four.columns
-            button.button-primary.u-full-width(ng-click="trackAction('skip')")
-              i.ion-ios-skipforward
+      .six.columns(ng-if="!loadingTracks")
+        h6 now playing
+        .now-playing
+          li(ng-if="!tracks[0].playing")
+            p.metadata
+              strong No song playing.
+          li(ng-if="tracks[0].playing")
+            .image-holder
+              img(src="{{tracks[0].img}}")
+            p.metadata
+              strong {{ tracks[0].title }}
+          .row.track-actions
+            .four.columns
+              a.u-full-width(href="" ng-click="trackAction('pause')") 
+                i.ion-ios-pause
+            .four.columns
+              a.u-full-width(href="" ng-click="trackAction('play')")
+                i.ion-ios-play
+            .four.columns
+              a.u-full-width(href="" ng-click="trackAction('skip')")
+                i.ion-ios-skipforward
         .row
           .twelve.columns
             a(ui-sref="player({name: party})" target="_blank" class="u-full-width button") 
-              | Open Youtube Player
+              | Pop-out Youtube Player
               &nbsp;
               i.ion-arrow-right-a
         div(ng-if="!loadingTracks && playedTracks.length > 0")

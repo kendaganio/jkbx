@@ -37,6 +37,7 @@ form {
 @mixin list-styling {
   list-style: none;
   border: 1px solid #D1D1D1;
+  box-sizing: border-box;
 
   li {
     display: table;
@@ -109,10 +110,30 @@ form {
 
   }
 
+  .now-playing {
+    @include list-styling;
+    border-color: rgba(22, 160, 133, 0.7);
+    border-radius: 4px;
+    margin-bottom: 10px;
+
+    li {
+      border-color: rgba(22, 160, 133, 0.7);
+    }
+
+    .track-actions {
+      text-align: center;
+
+      a {
+        font-size: 140%;
+      }
+    }
+  }
+
   ul.queue-list {
     @include list-styling;
 
     .playing {
+      display: none;
       background: rgb(206, 252, 203);
     }
   }
