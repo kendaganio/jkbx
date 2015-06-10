@@ -8,11 +8,33 @@ angular.module "jkbx"
 
     controls = $firebaseObject(ref.controls)
 
+    $scope.user = 'Stranger'
     $scope.party = $stateParams.name
     $scope.newTrack = {}
     $scope.tracks = $firebaseArray(ref.tracks)
     $scope.playedTracks = $firebaseArray(ref.playedTracks)
     $scope.loadingTracks = true
+
+    if localStorage.jkbx_name
+      $scope.user = localStorage.jkbx_name
+    else
+      swal {
+        title: 'Hello, stranger! Tell me your name.'
+        type: 'input'
+        showCancelButton: false
+        closeOnConfirm: false
+        animation: 'slide-from-top'
+        inputPlaceholder: 'Bob is fine.'
+      }, (name) ->
+        if name == false
+          return false
+        if name == ''
+          swal.showInputError 'You need to introduce yourself!'
+          return false
+
+        localStorage.jkbx_name = name
+        swal 'Legit!', "Welcome to the party #{name}!", 'success'
+        $scope.user = name
 
     $scope.tracks.$loaded().then ->
       $scope.loadingTracks = false
@@ -29,6 +51,7 @@ angular.module "jkbx"
         title: track.snippet.title
         videoId: track.id.videoId
         playing: false
+        addedBy: $scope.user
 
       $scope.newTrack.name = ''
 

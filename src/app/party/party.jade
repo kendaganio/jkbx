@@ -3,7 +3,7 @@
     h1 {{party}}'s playlist
     .row
       .six.columns
-        h6 Search for a track
+        h6 Hi {{user}}, Search for a track!
         form.search(name="form")
           input.search-bar.u-full-width(type="text" ng-model="newTrack.name" ng-model-options="{debounce: 800}" placeholder="Find your favorite artist or song..")
           ul.search-results(ng-if="results.length > 1")
@@ -30,6 +30,8 @@
                   img(src="{{track.img}}")
                 p.metadata
                   strong {{ track.title }}
+                  span(ng-if="track.addedBy != ''")
+                    &nbsp - {{track.addedBy}}
                 p.controls
                   a(href="" title="remove" ng-click="tracks.$remove($index)")
                     i.ion-close
