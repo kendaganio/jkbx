@@ -49,8 +49,6 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 h1 {
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 800;
   font-size: 3rem;
   padding: 20px;
 }
@@ -69,8 +67,5 @@ input#playlist {
 
   width: 30%;
   text-align: center;
-}
-
-input#playlist::placeholder { 
 }
 </style>

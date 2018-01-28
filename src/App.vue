@@ -12,4 +12,9 @@ export default {
 body, input {
   font-family: 'Raleway', 'Helvetica Neue', Helvetica, sans-serif;
 }
+
+h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+}
 </style>
