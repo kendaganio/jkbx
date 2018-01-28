@@ -8,7 +8,9 @@
           <br/>YouTube playlist for all.
         </h2>
 
-        <input type="text" class="input is-large" id="playlist" v-model="playlist" />
+        <form v-on:submit="getTurnt">
+          <input type="text" class="input is-large" id="playlist" v-model="playlist" />
+        </form>
       </div>
     </div>
   </section>
@@ -41,6 +43,11 @@ export default {
     clearText() {
       this.typer.stop();
       this.playlist = '';
+    },
+
+    getTurnt(event) {
+      event.preventDefault();
+      this.$router.push({ name: 'Party', params: { id: this.playlist } });
     },
   },
 };
