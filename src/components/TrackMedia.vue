@@ -5,16 +5,14 @@
     </figure>
     <div class="media-content">
       <div class="content">
-        <strong>
-          <a :href="youtubeLink" target="_blank">
-            {{ trackData.title }}
-          </a>
-        </strong>
+        <a :href="youtubeLink" target="_blank">
+          {{ trackData.title }}
+        </a>
 
         <nav class="level">
           <div class="level-left">
             <span class="tag level-item">
-            <i class="icon ion-android-person-add"></i> {{ trackData.addedBy }}
+              <i class="icon ion-android-person-add"></i> {{ trackData.addedBy }}
             </span>
             <a @click="removeTrack(trackData.key)" class="level-item">
               <i class="icon ion-close-round"></i>
@@ -36,13 +34,12 @@ export default {
 
   computed: {
     youtubeLink() {
-      return "https://youtube.com/watch?v=" + this.trackData.videoId;
-    }
+      return `https://youtube.com/watch?v=${this.trackData.videoId}`;
+    },
   },
 
   methods: {
-    removeTrack(event, key) {
-      alert(`removing -- ${key}`);
+    removeTrack() {
     },
   },
 };
@@ -50,6 +47,7 @@ export default {
 
 <style scoped>
 article.media {
+  padding: 0.5rem;
   border-radius: 0;
 }
 

@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "firebase": "^4.9.0",
+    "sweetalert": "^2.1.0",
     "typed.js": "^2.0.6",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
