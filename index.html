@@ -4,8 +4,24 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title>jkbx. | Collaborative YouTube Playlists</title>
+
+    <script src="https://www.youtube.com/iframe_api"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css" />
     <link href="https://fonts.googleapis.com/css?family=Montserrat:800|Raleway" rel="stylesheet">
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+
+    <script type="text/javascript">
+      // Load up the Youtube Data API
+      function YoutubeApiLoad() {
+        gapi.client.setApiKey('AIzaSyCXgyt37wBflt3LeW8ls6P_bpkFAIHARmE');
+        gapi.client.setApiKey('AIzaSyD0kYfb-et-hNuLKF0x55eMHxPq_ksbWr0');
+        gapi.client.load('youtube', 'v3', function() {
+          window.youtubeDataAPIStatus = 'ready';
+        });
+      }
+    </script>
+    <script src="https://apis.google.com/js/client.js?onload=YoutubeApiLoad"></script>
+
   </head>
   <body>
     <div id="jkbx-app"></div>
