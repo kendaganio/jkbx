@@ -10,7 +10,7 @@ export default {
 
 <style>
 body, input {
-  font-family: 'Raleway', 'Helvetica Neue', Helvetica, sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, sans-serif;
 }
 
 h1 {
