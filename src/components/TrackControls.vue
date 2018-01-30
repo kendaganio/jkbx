@@ -4,7 +4,7 @@
       <div v-if="!!trackData" class="card-content">
         <div class="level">
           <div class="level-left">
-            <img class="level-item":src="trackData.img"/>
+            <img class="level-item" :src="trackData.img"/>
             <div class="level-item">
               <strong class="track-title">{{trackData.title }}</strong>
             </div>
@@ -18,13 +18,13 @@
 
       <footer class="card-footer">
         <div class="card-footer-item">
-          <a class="button"><i class="ion-ios-pause"></i></a>
+          <a class="button is-link is-outlined"><i class="ion-ios-pause"></i></a>
         </div>
         <div class="card-footer-item">
-          <a class="button"><i class="ion-ios-play"></i></a>
+          <a class="button is-link is-outlined"><i class="ion-ios-play"></i></a>
         </div>
         <div class="card-footer-item">
-          <a class="button"><i class="ion-ios-skipforward"></i></a>
+          <a class="button is-link is-outlined"><i class="ion-ios-skipforward"></i></a>
         </div>
       </footer>
     </div>
@@ -53,7 +53,7 @@ h2 {
 .track-title {
   font-family: 'Montserrat', sans-serif;
   font-weight: 800;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   word-wrap: break-word;
   max-width: 500px;
 }

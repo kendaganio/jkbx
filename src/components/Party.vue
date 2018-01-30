@@ -25,7 +25,8 @@
         <h2>Now Playing</h2>
         <track-controls :trackData="currentTrack"/>
         <br/>
-        <a href="http://google.com" target="_blank" class="button is-primary is-outlined small-text full-width">
+        <a :href="playerLink" target="_blank"
+           class="button is-primary is-outlined small-text full-width">
           Pop-out youtube player
           <i class="icon ion-forward"></i>
         </a>
@@ -67,6 +68,10 @@ export default {
   computed: {
     currentTrack() {
       return (this.tracks.length > 0) ? this.tracks[0] : undefined;
+    },
+
+    playerLink() {
+      return `#/party/${this.$route.params.id}/player`;
     },
   },
 

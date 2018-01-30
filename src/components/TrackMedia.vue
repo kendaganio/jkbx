@@ -5,24 +5,23 @@
     </figure>
     <div class="media-content">
       <div class="content">
-        <a :href="youtubeLink" target="_blank">
-          {{ trackData.title }}
+        {{ trackData.title }}
+        <a :href="youtubeLink" title="Open video in new tab" target="_blank">
+          <i class="icon ion-android-open"></i>
         </a>
 
-        <nav class="level">
+        <nav class="level is-mobile">
           <div class="level-left">
             <span class="tag level-item">
-              <i class="icon ion-android-person-add"></i> {{ trackData.addedBy }}
+              {{ trackData.addedBy }}
             </span>
-            <a @click="removeTrack(trackData.key)" class="level-item">
-              <i class="icon ion-close-round"></i>
-            </a>
-            <a v-if="hasRequeue === 'true'" class="level-item">
-              <i class="icon ion-refresh"></i> Re-queue
-            </a>
           </div>
         </nav>
       </div>
+    </div>
+
+    <div class="media-right">
+      <a @click="removeTrack" class="delete"></a>
     </div>
   </article>
 </template>
@@ -40,6 +39,7 @@ export default {
 
   methods: {
     removeTrack() {
+      console.log(this.trackData['.key']);
     },
   },
 };
