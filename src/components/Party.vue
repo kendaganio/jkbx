@@ -1,11 +1,13 @@
 <template>
   <section class="section">
-    <h1>🎉 {{ $route.params.id }}</h1>
+    <h1>
+      🎉 {{ $route.params.id }}
+    </h1>
 
     <div class="columns">
       <div class="column is-one-half">
         <h2>Hi {{ user }}!  Search for a track to get the party started.</h2>
-        <input type="text" class="input" placeholder="Find your favorite artist or song..."/>
+        <track-search v-on:add-track="queueTrack"/>
         <br/>
         <br/>
 
@@ -16,7 +18,11 @@
         <div v-else>
           <h2>Up Next</h2>
           <div :key="track.key" v-for="track in tracks">
-            <track-media v-if="!track.playing" :trackData="track" hasRequeue="false"/>
+            <track-media
+              v-on:remove-track="removeTrack"
+              v-if="!track.playing"
+              :trackData="track"
+              hasRequeue="false"/>
           </div>
         </div>
       </div>
@@ -34,7 +40,11 @@
         <div v-if="playedTracks.length !== 0">
           <h2>Played Tracks</h2>
           <div :key="track.key" v-for="track in playedTracks">
-            <track-media :trackData="track" hasRequeue="true"/>
+            <track-media
+              v-on:remove-track="removePlayedTrack"
+              v-on:requeue-track="queueTrack"
+              :trackData="track"
+              hasRequeue="true"/>
           </div>
         </div>
       </div>
@@ -47,6 +57,7 @@
 import swal from 'sweetalert';
 import TrackMedia from './TrackMedia';
 import TrackControls from './TrackControls';
+import TrackSearch from './TrackSearch';
 
 export default {
   name: 'Party',
@@ -67,11 +78,31 @@ export default {
 
   computed: {
     currentTrack() {
-      return (this.tracks.length > 0) ? this.tracks[0] : undefined;
+      return (this.tracks.length > 0 && this.tracks[0].playing) ? this.tracks[0] : undefined;
     },
 
     playerLink() {
       return `#/party/${this.$route.params.id}/player`;
+    },
+  },
+
+  methods: {
+    removeTrack(data) {
+      this.$firebaseRefs.tracks.child(data['.key']).remove();
+    },
+
+    removePlayedTrack(data) {
+      this.$firebaseRefs.playedTracks.child(data['.key']).remove();
+    },
+
+    queueTrack(data) {
+      const newTrack = {
+        ...data,
+        playing: false,
+        addedBy: this.user,
+      };
+
+      this.$firebaseRefs.tracks.push(newTrack);
     },
   },
 
@@ -101,6 +132,7 @@ export default {
   components: {
     TrackMedia,
     TrackControls,
+    TrackSearch,
   },
 };
 </script>

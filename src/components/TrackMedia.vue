@@ -15,6 +15,11 @@
             <span class="tag level-item">
               {{ trackData.addedBy }}
             </span>
+            <span class="level-item">
+              <a @click="requeue">
+              re-q
+              </a>
+            </span>
           </div>
         </nav>
       </div>
@@ -39,7 +44,14 @@ export default {
 
   methods: {
     removeTrack() {
-      console.log(this.trackData['.key']);
+      this.$emit('remove-track', this.trackData);
+    },
+
+    requeue() {
+      const data = Object.assign({}, this.trackData);
+      delete data['.key'];
+
+      this.$emit('requeue-track', data);
     },
   },
 };
