@@ -33,6 +33,9 @@ export default new Router({
       path: '/party/:id/player',
       name: 'Player',
       component: Player,
+      props: {
+        firebaseDb,
+      },
     },
   ],
 });

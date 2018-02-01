@@ -29,7 +29,7 @@
 
       <div class="column is-one-half">
         <h2>Now Playing</h2>
-        <track-controls :trackData="currentTrack"/>
+        <track-controls @track-action="trackAction" :trackData="currentTrack"/>
         <br/>
         <a :href="playerLink" target="_blank"
            class="button is-primary is-outlined small-text full-width">
@@ -73,6 +73,10 @@ export default {
     return {
       tracks: this.firebaseDb.ref(`/party/${this.$route.params.id}/tracks`),
       playedTracks: this.firebaseDb.ref(`/party/${this.$route.params.id}/playedTracks`),
+      controls: {
+        source: this.firebaseDb.ref(`/party/${this.$route.params.id}/controls`),
+        asObject: true,
+      },
     };
   },
 
@@ -103,6 +107,13 @@ export default {
       };
 
       this.$firebaseRefs.tracks.push(newTrack);
+    },
+
+    trackAction(action) {
+      this.$firebaseRefs.controls.set({
+        action,
+        time: Date.now(),
+      });
     },
   },
 

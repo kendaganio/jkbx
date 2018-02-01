@@ -16,8 +16,8 @@
               {{ trackData.addedBy }}
             </span>
             <span class="level-item">
-              <a @click="requeue">
-              re-q
+              <a v-if="hasRequeue === 'true'" @click="requeue">
+                <i class="icon ion-refresh"></i> Requeue
               </a>
             </span>
           </div>

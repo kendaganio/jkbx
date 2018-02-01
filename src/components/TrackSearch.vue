@@ -66,6 +66,7 @@ export default {
       };
       this.$emit('add-track', newTrack);
       this.searchResults = [];
+      this.searchText = '';
     },
   },
 };

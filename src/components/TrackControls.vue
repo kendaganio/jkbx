@@ -18,13 +18,19 @@
 
       <footer class="card-footer">
         <div class="card-footer-item">
-          <a class="button is-link is-outlined"><i class="ion-ios-pause"></i></a>
+          <a @click="action('pause')" class="button is-link is-outlined">
+            <i class="ion-ios-pause"></i>
+          </a>
         </div>
         <div class="card-footer-item">
-          <a class="button is-link is-outlined"><i class="ion-ios-play"></i></a>
+          <a @click="action('play')" class="button is-link is-outlined">
+            <i class="ion-ios-play"></i>
+          </a>
         </div>
         <div class="card-footer-item">
-          <a class="button is-link is-outlined"><i class="ion-ios-skipforward"></i></a>
+          <a @click="action('skip')" class="button is-link is-outlined">
+            <i class="ion-ios-skipforward"></i>
+          </a>
         </div>
       </footer>
     </div>
@@ -36,6 +42,12 @@
 export default {
   name: 'TrackControls',
   props: ['trackData'],
+
+  methods: {
+    action(action) {
+      this.$emit('track-action', action);
+    },
+  },
 };
 </script>
 
