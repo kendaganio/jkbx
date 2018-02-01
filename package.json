@@ -6,14 +6,16 @@
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
-    "start": "npm run dev",
+    "start": "yarn dev",
     "unit": "jest --config test/unit/jest.conf.js --coverage",
     "test": "npm run unit",
     "lint": "eslint --ext .js,.vue src test/unit",
-    "build": "node build/build.js"
+    "build": "node build/build.js",
+    "deploy": "yarn build && gh-pages -b gh-pages -d dist"
   },
   "dependencies": {
     "firebase": "^4.9.0",
+    "gh-pages": "^1.1.0",
     "sweetalert": "^2.1.0",
     "typed.js": "^2.0.6",
     "vue": "^2.5.2",

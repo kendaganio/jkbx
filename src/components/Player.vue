@@ -75,10 +75,10 @@ export default {
       this.player = player;
     },
 
-    ended(player) {
+    ended() {
       const track = this.firstTrack();
       this.$firebaseRefs.playedTracks.push(this.stripKey(track));
-      this.$firebaseRefs.tracks.child(track['.key']).remove()
+      this.$firebaseRefs.tracks.child(track['.key']).remove();
 
       this.queueTrack(this.firstTrack());
     },
