@@ -2,6 +2,10 @@
 
 > No nonsense collaborative YouTube playlist for the masses.
 
+<p align='center'>
+<a href='https://kendaganio.com/jkbx'><img src='misc/jkbxscreenshot.png'></a>
+</p>
+
 ## Build Setup
 
 ``` bash
